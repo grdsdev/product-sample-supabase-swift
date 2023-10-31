@@ -18,7 +18,11 @@ final class MFAViewModel: ObservableObject {
     case verified(verified: Factor?, others: [Factor])
   }
 
-  @Published var status: Status = .loading
+  @Published var status: Status = .loading {
+    didSet {
+      bindStatus()
+    }
+  }
 
   func load() async {
     do {
@@ -35,6 +39,19 @@ final class MFAViewModel: ObservableObject {
       }
     } catch {
 
+    }
+  }
+
+  private func bindStatus() {
+    switch status {
+    case .enroll(let model):
+      model.onEnroll = { [weak self] in
+        Task {
+          await self?.load()
+        }
+      }
+    default:
+      break
     }
   }
 }
