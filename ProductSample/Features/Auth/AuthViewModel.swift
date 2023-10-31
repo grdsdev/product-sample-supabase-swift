@@ -7,12 +7,14 @@
 
 import Foundation
 import OSLog
+import Supabase
 
 @MainActor
 final class AuthViewModel: ObservableObject {
   private let logger = Logger.make(category: "AuthViewModel")
 
   private let signInUseCase: any SignInUseCase
+  private let signInWithAppleUseCase: any SignInWithAppleUseCase
   private let signUpUseCase: any SignUpUseCase
 
   @Published var email = ""
@@ -27,9 +29,11 @@ final class AuthViewModel: ObservableObject {
 
   init(
     signInUseCase: any SignInUseCase = Dependencies.signInUseCase,
+    signInWithAppleUseCase: any SignInWithAppleUseCase = Dependencies.signInWithAppleUseCase,
     signUpUseCase: any SignUpUseCase = Dependencies.signUpUseCase
   ) {
     self.signInUseCase = signInUseCase
+    self.signInWithAppleUseCase = signInWithAppleUseCase
     self.signUpUseCase = signUpUseCase
   }
 
@@ -58,7 +62,14 @@ final class AuthViewModel: ObservableObject {
     }
   }
 
-  func signInWithAppleButtonTapped() async {}
+  func signInWithApple(_ result: Result<SIWACredentials, Error>) async {
+    do {
+      let credentials = try result.get()
+      try await signInWithAppleUseCase.execute(input: credentials).value
+    } catch {
+      logger.error("Error signing in with apple: \(error)")
+    }
+  }
 
   func onOpenURL(_ url: URL) async {
     do {

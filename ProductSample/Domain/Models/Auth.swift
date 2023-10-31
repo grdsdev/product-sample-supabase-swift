@@ -6,6 +6,12 @@
 //
 
 import Foundation
+import Supabase
+
+struct SIWACredentials {
+  let identityToken: String
+  let nonce: String
+}
 
 struct Credentials {
   let email, password: String

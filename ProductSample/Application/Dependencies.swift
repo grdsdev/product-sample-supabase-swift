@@ -52,6 +52,10 @@ enum Dependencies {
     repository: authenticationRepository
   )
 
+  static let signInWithAppleUseCase: any SignInWithAppleUseCase = SignInWithAppleUseCaseImpl(
+    repository: authenticationRepository
+  )
+
   static let signUpUseCase: any SignUpUseCase = SignUpUseCaseImpl(
     repository: authenticationRepository
   )

@@ -14,7 +14,7 @@ protocol AuthenticationRepository: Sendable {
   func authStateListener() async -> AsyncStream<AuthenticationState>
   func signIn(email: String, password: String) async throws
   func signUp(email: String, password: String) async throws -> SignUpResult
-  func signInWithApple() async throws
+  func signInWithApple(credentials: SIWACredentials) async throws
   func signOut() async
 }
 
@@ -59,8 +59,14 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     return .requiresConfirmation
   }
 
-  func signInWithApple() async throws {
-    fatalError("\(#function) unimplemented")
+  func signInWithApple(credentials: SIWACredentials) async throws {
+    try await client.signInWithIdToken(
+      credentials: OpenIDConnectCredentials(
+        provider: .apple,
+        idToken: credentials.identityToken,
+        nonce: credentials.nonce
+      )
+    )
   }
 
   func signOut() async {

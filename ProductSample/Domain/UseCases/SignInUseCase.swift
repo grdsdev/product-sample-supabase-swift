@@ -18,3 +18,15 @@ struct SignInUseCaseImpl: SignInUseCase {
     }
   }
 }
+
+protocol SignInWithAppleUseCase: UseCase<SIWACredentials, Task<Void, Error>> {}
+
+struct SignInWithAppleUseCaseImpl: SignInWithAppleUseCase {
+  let repository: AuthenticationRepository
+
+  func execute(input: SIWACredentials) -> Task<Void, Error> {
+    Task {
+      try await repository.signInWithApple(credentials: input)
+    }
+  }
+}

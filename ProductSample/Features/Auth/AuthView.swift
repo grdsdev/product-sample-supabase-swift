@@ -31,9 +31,9 @@ struct AuthView: View {
         AsyncButton("Sign up") {
           await model.signUpButtonTapped()
         }
-        Button("Sign in with Apple") {
+        SupabaseSignInWithAppleButton { result in
           Task {
-            await model.signInWithAppleButtonTapped()
+            await model.signInWithApple(result)
           }
         }
       }
