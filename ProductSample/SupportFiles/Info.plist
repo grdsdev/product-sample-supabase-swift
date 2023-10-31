@@ -9,7 +9,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>dev.grds.ProductSample</string>
+				<string>dev.grds.supabase.product-sample</string>
 			</array>
 		</dict>
 	</array>

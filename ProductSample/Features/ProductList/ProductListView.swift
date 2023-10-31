@@ -24,7 +24,9 @@ struct ProductListView: View {
       }
 
       ForEach(model.products) { product in
-        NavigationLink(value: ProductDetailRoute(productId: product.id)) {
+        Button {
+          model.didTapProduct(product)
+        } label: {
           LabeledContent(product.name, value: product.price.formatted(.currency(code: "USD")))
         }
       }

@@ -7,6 +7,7 @@
 
 import OSLog
 import SwiftUI
+import XCTestDynamicOverlay
 
 @MainActor
 final class ProductListViewModel: ObservableObject {
@@ -18,6 +19,9 @@ final class ProductListViewModel: ObservableObject {
   @Published var products: [Product] = []
   @Published var isLoading = false
   @Published var error: Error?
+
+  var onProductTapped: (Product) -> Void = unimplemented(
+    "\(ProductListViewModel.self).onProductTapped")
 
   init(
     deleteProductUseCase: any DeleteProductUseCase = Dependencies.deleteProductUseCase,
@@ -46,6 +50,10 @@ final class ProductListViewModel: ObservableObject {
       let product = products[index]
       await removeItem(product: product)
     }
+  }
+
+  func didTapProduct(_ product: Product) {
+    onProductTapped(product)
   }
 
   private func removeItem(product: Product) async {

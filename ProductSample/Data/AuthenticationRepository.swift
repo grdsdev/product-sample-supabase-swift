@@ -45,10 +45,13 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
   }
 
   func signUp(email: String, password: String) async throws -> SignUpResult {
+    // This redirect to URL should match the one configured in Supabase's Dashboard.
+    let redirectToURL = URL(string: "dev.grds.supabase.product-sample://")
+
     let response = try await client.signUp(
       email: email,
       password: password,
-      redirectTo: URL(string: "dev.grds.ProductSample://")
+      redirectTo: redirectToURL
     )
     if case .session = response {
       return .success

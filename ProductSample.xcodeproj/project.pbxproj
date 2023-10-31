@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1112AF17CCB00FC331E /* AsyncButton.swift */; };
+		79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1152AF1820E00FC331E /* SettingsView.swift */; };
+		79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B1182AF1832C00FC331E /* SwiftUINavigation */; };
+		79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */; };
 		79D362E82AF1530300BD7BAF /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79D362E72AF1530300BD7BAF /* Supabase */; };
 		79D363152AF1535100BD7BAF /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EB2AF1535100BD7BAF /* Auth.swift */; };
 		79D363162AF1535100BD7BAF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EC2AF1535100BD7BAF /* Product.swift */; };
@@ -40,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79A7B1112AF17CCB00FC331E /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		79A7B1152AF1820E00FC331E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79D362D42AF152D700BD7BAF /* ProductSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D362EB2AF1535100BD7BAF /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		79D362EC2AF1535100BD7BAF /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -79,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */,
+				79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */,
 				79D362E82AF1530300BD7BAF /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +94,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79A7B1102AF17CC100FC331E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				79A7B1112AF17CCB00FC331E /* AsyncButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		79A7B1142AF1820400FC331E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				79A7B1152AF1820E00FC331E /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		79D362CB2AF152D700BD7BAF = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +129,7 @@
 		79D362D62AF152D700BD7BAF /* ProductSample */ = {
 			isa = PBXGroup;
 			children = (
+				79A7B1102AF17CC100FC331E /* Components */,
 				79D362F62AF1535100BD7BAF /* Application */,
 				79D363032AF1535100BD7BAF /* Data */,
 				79D362E92AF1535100BD7BAF /* Domain */,
@@ -210,6 +235,7 @@
 		79D3630B2AF1535100BD7BAF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				79A7B1142AF1820400FC331E /* Settings */,
 				79D3630C2AF1535100BD7BAF /* Auth */,
 				79D3630F2AF1535100BD7BAF /* ProductDetails */,
 				79D363122AF1535100BD7BAF /* ProductList */,
@@ -262,6 +288,8 @@
 			name = ProductSample;
 			packageProductDependencies = (
 				79D362E72AF1530300BD7BAF /* Supabase */,
+				79A7B1182AF1832C00FC331E /* SwiftUINavigation */,
+				79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */,
 			);
 			productName = ProductSample;
 			productReference = 79D362D42AF152D700BD7BAF /* ProductSample.app */;
@@ -293,6 +321,7 @@
 			mainGroup = 79D362CB2AF152D700BD7BAF;
 			packageReferences = (
 				79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 			);
 			productRefGroup = 79D362D52AF152D700BD7BAF /* Products */;
 			projectDirPath = "";
@@ -342,8 +371,10 @@
 				79D363282AF1535100BD7BAF /* ProductRepository.swift in Sources */,
 				79D363192AF1535100BD7BAF /* SignUpUseCase.swift in Sources */,
 				79D3632E2AF1535100BD7BAF /* AuthViewModel.swift in Sources */,
+				79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */,
 				79D3632D2AF1535100BD7BAF /* Config.swift in Sources */,
 				79D363332AF1535100BD7BAF /* ProductListView.swift in Sources */,
+				79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */,
 				79D3631E2AF1535100BD7BAF /* GetProductsUseCase.swift in Sources */,
 				79D3632F2AF1535100BD7BAF /* AuthView.swift in Sources */,
 				79D363172AF1535100BD7BAF /* GetProductUseCase.swift in Sources */,
@@ -480,6 +511,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProductSample/SupportFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -495,7 +527,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.grds.ProductSample;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.grds.supabase.product-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -519,6 +551,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProductSample/SupportFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -534,7 +567,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.grds.ProductSample;
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.grds.supabase.product-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -569,6 +602,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase-community/supabase-swift";
@@ -580,6 +621,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		79A7B1182AF1832C00FC331E /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
+		};
+		79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigationCore;
+		};
 		79D362E72AF1530300BD7BAF /* Supabase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */;

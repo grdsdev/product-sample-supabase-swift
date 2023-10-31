@@ -8,6 +8,7 @@
 import OSLog
 import PhotosUI
 import SwiftUI
+import XCTestDynamicOverlay
 
 @MainActor
 final class ProductDetailsViewModel: ObservableObject {
@@ -47,22 +48,20 @@ final class ProductDetailsViewModel: ObservableObject {
   @Published var imageSource: ImageSource?
   @Published var isSavingProduct = false
 
-  let onCompletion: (Bool) -> Void
+  var onCompletion: (Bool) -> Void = unimplemented("\(ProductDetailsViewModel.self).onCompletion")
 
   init(
     updateProductUseCase: any UpdateProductUseCase = Dependencies.updateProductUseCase,
     createProductUseCase: any CreateProductUseCase = Dependencies.createProductUseCase,
     getProductUseCase: any GetProductUseCase = Dependencies.getProductUseCase,
     productImageStorage: ProductImageStorageRepository = Dependencies.productImageStorageRepository,
-    productId: Product.ID?,
-    onCompletion: @escaping (Bool) -> Void
+    productId: Product.ID?
   ) {
     self.updateProductUseCase = updateProductUseCase
     self.createProductUseCase = createProductUseCase
     self.getProductUseCase = getProductUseCase
     self.productImageStorage = productImageStorage
     self.productId = productId
-    self.onCompletion = onCompletion
   }
 
   func loadProductIfNeeded() async {
@@ -87,17 +86,16 @@ final class ProductDetailsViewModel: ObservableObject {
     defer { isSavingProduct = false }
 
     let imageUploadParams =
-      if case let .local(image) = imageSource
-    {
-      ImageUploadParams(
-        fileName: UUID().uuidString,
-        fileExtension: imageSelection?.supportedContentTypes.first?.preferredFilenameExtension,
-        mimeType: imageSelection?.supportedContentTypes.first?.preferredMIMEType,
-        data: image.data
-      )
-    } else {
-      ImageUploadParams?.none
-    }
+      if case let .local(image) = imageSource {
+        ImageUploadParams(
+          fileName: UUID().uuidString,
+          fileExtension: imageSelection?.supportedContentTypes.first?.preferredFilenameExtension,
+          mimeType: imageSelection?.supportedContentTypes.first?.preferredMIMEType,
+          data: image.data
+        )
+      } else {
+        ImageUploadParams?.none
+      }
 
     do {
       if let productId {

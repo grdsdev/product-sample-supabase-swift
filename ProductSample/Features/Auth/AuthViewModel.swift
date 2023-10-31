@@ -19,7 +19,6 @@ final class AuthViewModel: ObservableObject {
   @Published var password = ""
 
   enum Status {
-    case loading
     case requiresConfirmation
     case error(Error)
   }
@@ -35,7 +34,6 @@ final class AuthViewModel: ObservableObject {
   }
 
   func signInButtonTapped() async {
-    status = .loading
     do {
       try await signInUseCase.execute(input: .init(email: email, password: password)).value
       status = nil
@@ -46,7 +44,6 @@ final class AuthViewModel: ObservableObject {
   }
 
   func signUpButtonTapped() async {
-    status = .loading
     do {
       let result = try await signUpUseCase.execute(input: .init(email: email, password: password))
         .value
@@ -64,8 +61,6 @@ final class AuthViewModel: ObservableObject {
   func signInWithAppleButtonTapped() async {}
 
   func onOpenURL(_ url: URL) async {
-    status = .loading
-
     do {
       logger.debug("Retrieve session from url: \(url)")
       try await Dependencies.supabase.auth.session(from: url)

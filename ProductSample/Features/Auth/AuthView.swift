@@ -25,15 +25,11 @@ struct AuthView: View {
       }
 
       Section {
-        Button("Sign in") {
-          Task {
-            await model.signInButtonTapped()
-          }
+        AsyncButton("Sign in") {
+          await model.signInButtonTapped()
         }
-        Button("Sign up") {
-          Task {
-            await model.signUpButtonTapped()
-          }
+        AsyncButton("Sign up") {
+          await model.signUpButtonTapped()
         }
         Button("Sign in with Apple") {
           Task {
@@ -51,11 +47,10 @@ struct AuthView: View {
             "Account created, but it requires confirmation, click the verification link sent to the registered email."
           )
           .font(.callout)
-        case .loading:
-          ProgressView()
         }
       }
     }
+    .navigationTitle("Authenticate")
     .onOpenURL { url in
       Task { await model.onOpenURL(url) }
     }
