@@ -14,6 +14,11 @@ final class SettingsViewModel: ObservableObject {
   private let logger = Logger.make(category: "SettingsViewModel")
   let authenticationRepository: AuthenticationRepository
 
+  enum NavigationDestination {
+    case mfa(MFAViewModel)
+  }
+
+  @Published var destination: NavigationDestination?
   @Published var user: User?
 
   init(authenticationRepository: AuthenticationRepository = Dependencies.authenticationRepository) {
@@ -31,6 +36,10 @@ final class SettingsViewModel: ObservableObject {
       logger.error("Error loading profile: \(error.localizedDescription)")
     }
   }
+
+  func mfaButtonTapped() {
+    destination = .mfa(MFAViewModel())
+  }
 }
 
 struct SettingsView: View {
@@ -46,6 +55,12 @@ struct SettingsView: View {
       }
 
       Section {
+        Button("Multi-Factor Authentication (MFA)") {
+          model.mfaButtonTapped()
+        }
+      }
+
+      Section {
         AsyncButton("Sign out", role: .destructive) {
           await model.signOutButtonTapped()
         }
@@ -54,6 +69,12 @@ struct SettingsView: View {
     .navigationTitle("Settings")
     .task {
       await model.loadProfile()
+    }
+    .navigationDestination(unwrapping: $model.destination) { $destination in
+      switch destination {
+      case .mfa(let model):
+        MFAView(model: model)
+      }
     }
   }
 }

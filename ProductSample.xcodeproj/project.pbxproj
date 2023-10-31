@@ -11,7 +11,9 @@
 		79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1152AF1820E00FC331E /* SettingsView.swift */; };
 		79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B1182AF1832C00FC331E /* SwiftUINavigation */; };
 		79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */; };
-		79A7B11D2AF1882900FC331E /* SupabaseSIWA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11C2AF1882900FC331E /* SupabaseSIWA.swift */; };
+		79A7B11D2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */; };
+		79A7B1202AF19B0900FC331E /* MFAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11F2AF19B0900FC331E /* MFAView.swift */; };
+		79A7B1222AF19EEE00FC331E /* MFAEnrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1212AF19EEE00FC331E /* MFAEnrollView.swift */; };
 		79D362E82AF1530300BD7BAF /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79D362E72AF1530300BD7BAF /* Supabase */; };
 		79D363152AF1535100BD7BAF /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EB2AF1535100BD7BAF /* Auth.swift */; };
 		79D363162AF1535100BD7BAF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EC2AF1535100BD7BAF /* Product.swift */; };
@@ -47,7 +49,9 @@
 /* Begin PBXFileReference section */
 		79A7B1112AF17CCB00FC331E /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		79A7B1152AF1820E00FC331E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		79A7B11C2AF1882900FC331E /* SupabaseSIWA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSIWA.swift; sourceTree = "<group>"; };
+		79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSignInWithAppleButton.swift; sourceTree = "<group>"; };
+		79A7B11F2AF19B0900FC331E /* MFAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAView.swift; sourceTree = "<group>"; };
+		79A7B1212AF19EEE00FC331E /* MFAEnrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAEnrollView.swift; sourceTree = "<group>"; };
 		79D362D42AF152D700BD7BAF /* ProductSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D362EB2AF1535100BD7BAF /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		79D362EC2AF1535100BD7BAF /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -100,7 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				79A7B1112AF17CCB00FC331E /* AsyncButton.swift */,
-				79A7B11C2AF1882900FC331E /* SupabaseSIWA.swift */,
+				79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -111,6 +115,15 @@
 				79A7B1152AF1820E00FC331E /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		79A7B11E2AF19B0000FC331E /* MFA */ = {
+			isa = PBXGroup;
+			children = (
+				79A7B11F2AF19B0900FC331E /* MFAView.swift */,
+				79A7B1212AF19EEE00FC331E /* MFAEnrollView.swift */,
+			);
+			path = MFA;
 			sourceTree = "<group>";
 		};
 		79D362CB2AF152D700BD7BAF = {
@@ -238,6 +251,7 @@
 		79D3630B2AF1535100BD7BAF /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				79A7B11E2AF19B0000FC331E /* MFA */,
 				79A7B1142AF1820400FC331E /* Settings */,
 				79D3630C2AF1535100BD7BAF /* Auth */,
 				79D3630F2AF1535100BD7BAF /* ProductDetails */,
@@ -360,10 +374,12 @@
 				79D3632C2AF1535100BD7BAF /* Result.swift in Sources */,
 				79D363222AF1535100BD7BAF /* Routes.swift in Sources */,
 				79D363312AF1535100BD7BAF /* ProductDetailsView.swift in Sources */,
+				79A7B1222AF19EEE00FC331E /* MFAEnrollView.swift in Sources */,
 				79D3631A2AF1535100BD7BAF /* DeleteProductUseCase.swift in Sources */,
 				79D363152AF1535100BD7BAF /* Auth.swift in Sources */,
+				79A7B1202AF19B0900FC331E /* MFAView.swift in Sources */,
 				79D363212AF1535100BD7BAF /* Dependencies.swift in Sources */,
-				79A7B11D2AF1882900FC331E /* SupabaseSIWA.swift in Sources */,
+				79A7B11D2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift in Sources */,
 				79D3631B2AF1535100BD7BAF /* SignInUseCase.swift in Sources */,
 				79D3631C2AF1535100BD7BAF /* CreateProductUseCase.swift in Sources */,
 				79D363162AF1535100BD7BAF /* Product.swift in Sources */,
