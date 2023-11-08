@@ -16,40 +16,7 @@ enum Dependencies {
 
   // MARK: Repositories
 
-  static let productRepository: ProductRepository = ProductRepositoryImpl(supabase: supabase)
   static let productImageStorageRepository: ProductImageStorageRepository =
     ProductImageStorageRepositoryImpl(storage: supabase.storage)
 
-  // MARK: Use Cases
-
-  static let updateProductUseCase: any UpdateProductUseCase = UpdateProductUseCaseImpl(
-    productRepository: productRepository,
-    productImageStorageRepository: productImageStorageRepository
-  )
-
-  static let createProductUseCase: any CreateProductUseCase = CreateProductUseCaseImpl(
-    productRepository: productRepository,
-    productImageStorageRepository: productImageStorageRepository,
-    authenticationRepository: supabase.auth
-  )
-
-  static let getProductUseCase: any GetProductUseCase = GetProductUseCaseImpl(
-    productRepository: productRepository
-  )
-
-  static let deleteProductUseCase: any DeleteProductUseCase = DeleteProductUseCaseImpl(
-    repository: productRepository
-  )
-
-  static let getProductsUseCase: any GetProductsUseCase = GetProductsUseCaseImpl(
-    repository: productRepository
-  )
-
-  static let signInUseCase: any SignInUseCase = SignInUseCaseImpl(
-    repository: supabase.auth
-  )
-
-  static let signInWithAppleUseCase: any SignInWithAppleUseCase = SignInWithAppleUseCaseImpl(
-    repository: supabase.auth
-  )
 }

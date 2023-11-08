@@ -6,21 +6,22 @@
 //
 
 import Foundation
+import GoTrue
 
 protocol SignOutUseCase: UseCase<Void, Task<Void, Never>> {}
 
 struct SignOutUseCaseImpl: SignOutUseCase {
-  let authenticationRepository: AuthenticationRepository
+  let auth: GoTrueClient
 
   func execute(input: ()) -> Task<(), Never> {
     Task {
-      await authenticationRepository.signOut()
+      try? await auth.signOut()
     }
   }
 }
 
 extension Dependencies {
   static let signOutUseCase: any SignOutUseCase = SignOutUseCaseImpl(
-    authenticationRepository: supabase.auth
+    auth: supabase.auth
   )
 }

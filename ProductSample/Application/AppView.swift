@@ -37,9 +37,9 @@ final class AppViewModel: ObservableObject {
 
   private var authStateListenerTask: Task<Void, Never>?
 
-  init(authenticationRepository: AuthenticationRepository = Dependencies.supabase.auth) {
+  init(authStateChangeHandler: AuthStateChangeHandler = Dependencies.supabase.auth) {
     authStateListenerTask = Task {
-      for await state in await authenticationRepository.authStateListener() {
+      for await state in await authStateChangeHandler.onAuthStateChange() {
         logger.debug("auth state changed: \(String(describing: state))")
 
         if Task.isCancelled {

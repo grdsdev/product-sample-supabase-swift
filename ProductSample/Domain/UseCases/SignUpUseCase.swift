@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoTrue
 
 enum SignUpResult {
   case success
@@ -15,17 +16,28 @@ enum SignUpResult {
 protocol SignUpUseCase: UseCase<Credentials, Task<SignUpResult, Error>> {}
 
 struct SignUpUseCaseImpl: SignUpUseCase {
-  let repository: AuthenticationRepository
+  let auth: GoTrueClient
 
   func execute(input: Credentials) -> Task<SignUpResult, Error> {
     Task {
-      try await repository.signUp(email: input.email, password: input.password)
+      // This redirect to URL should match the one configured in Supabase's Dashboard.
+      let redirectToURL = URL(string: "dev.grds.supabase.product-sample://")
+
+      let response = try await auth.signUp(
+        email: input.email,
+        password: input.password,
+        redirectTo: redirectToURL
+      )
+      if case .session = response {
+        return .success
+      }
+      return .requiresConfirmation
     }
   }
 }
 
 extension Dependencies {
   static let signUpUseCase: any SignUpUseCase = SignUpUseCaseImpl(
-    repository: supabase.auth
+    auth: supabase.auth
   )
 }

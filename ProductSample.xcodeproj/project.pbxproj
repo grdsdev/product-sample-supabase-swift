@@ -14,6 +14,7 @@
 		797834452AF3C402001A8E2E /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 797834442AF3C402001A8E2E /* Storage */; };
 		799F29282AFB9E4A004F74F5 /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F29272AFB9E4A004F74F5 /* SignOutUseCase.swift */; };
 		799F292A2AFB9ED6004F74F5 /* GetProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F29292AFB9ED6004F74F5 /* GetProfileUseCase.swift */; };
+		799F292C2AFBA55E004F74F5 /* AuthStateChangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F292B2AFBA55E004F74F5 /* AuthStateChangeHandler.swift */; };
 		79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1112AF17CCB00FC331E /* AsyncButton.swift */; };
 		79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1152AF1820E00FC331E /* SettingsView.swift */; };
 		79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B1182AF1832C00FC331E /* SwiftUINavigation */; };
@@ -38,8 +39,6 @@
 		79D363232AF1535100BD7BAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D362FD2AF1535100BD7BAF /* Assets.xcassets */; };
 		79D363242AF1535100BD7BAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D362FF2AF1535100BD7BAF /* Preview Assets.xcassets */; };
 		79D363262AF1535100BD7BAF /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79D363012AF1535100BD7BAF /* Config.plist */; };
-		79D363282AF1535100BD7BAF /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363042AF1535100BD7BAF /* ProductRepository.swift */; };
-		79D363292AF1535100BD7BAF /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363052AF1535100BD7BAF /* AuthenticationRepository.swift */; };
 		79D3632A2AF1535100BD7BAF /* ProductImageStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */; };
 		79D3632B2AF1535100BD7BAF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363082AF1535100BD7BAF /* Logger.swift */; };
 		79D3632C2AF1535100BD7BAF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363092AF1535100BD7BAF /* Result.swift */; };
@@ -56,6 +55,7 @@
 /* Begin PBXFileReference section */
 		799F29272AFB9E4A004F74F5 /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
 		799F29292AFB9ED6004F74F5 /* GetProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileUseCase.swift; sourceTree = "<group>"; };
+		799F292B2AFBA55E004F74F5 /* AuthStateChangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStateChangeHandler.swift; sourceTree = "<group>"; };
 		79A7B1112AF17CCB00FC331E /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		79A7B1152AF1820E00FC331E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSignInWithAppleButton.swift; sourceTree = "<group>"; };
@@ -80,8 +80,6 @@
 		79D362FF2AF1535100BD7BAF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		79D363012AF1535100BD7BAF /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		79D363022AF1535100BD7BAF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79D363042AF1535100BD7BAF /* ProductRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
-		79D363052AF1535100BD7BAF /* AuthenticationRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductImageStorageRepository.swift; sourceTree = "<group>"; };
 		79D363082AF1535100BD7BAF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		79D363092AF1535100BD7BAF /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -247,8 +245,7 @@
 		79D363032AF1535100BD7BAF /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				79D363042AF1535100BD7BAF /* ProductRepository.swift */,
-				79D363052AF1535100BD7BAF /* AuthenticationRepository.swift */,
+				799F292B2AFBA55E004F74F5 /* AuthStateChangeHandler.swift */,
 				79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */,
 			);
 			path = Data;
@@ -389,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D3632A2AF1535100BD7BAF /* ProductImageStorageRepository.swift in Sources */,
+				799F292C2AFBA55E004F74F5 /* AuthStateChangeHandler.swift in Sources */,
 				799F29282AFB9E4A004F74F5 /* SignOutUseCase.swift in Sources */,
 				799F292A2AFB9ED6004F74F5 /* GetProfileUseCase.swift in Sources */,
 				79D363322AF1535100BD7BAF /* ProductListViewModel.swift in Sources */,
@@ -407,11 +405,9 @@
 				79D3631C2AF1535100BD7BAF /* CreateProductUseCase.swift in Sources */,
 				79D363162AF1535100BD7BAF /* Product.swift in Sources */,
 				79D363182AF1535100BD7BAF /* UpdateProductUseCase.swift in Sources */,
-				79D363292AF1535100BD7BAF /* AuthenticationRepository.swift in Sources */,
 				79D3631D2AF1535100BD7BAF /* UseCase.swift in Sources */,
 				79D363202AF1535100BD7BAF /* AppView.swift in Sources */,
 				79D3632B2AF1535100BD7BAF /* Logger.swift in Sources */,
-				79D363282AF1535100BD7BAF /* ProductRepository.swift in Sources */,
 				79D363192AF1535100BD7BAF /* SignUpUseCase.swift in Sources */,
 				79D3632E2AF1535100BD7BAF /* AuthViewModel.swift in Sources */,
 				79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */,

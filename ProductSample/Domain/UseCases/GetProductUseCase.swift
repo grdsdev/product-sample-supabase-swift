@@ -6,15 +6,25 @@
 //
 
 import Foundation
+import PostgREST
 
 protocol GetProductUseCase: UseCase<Product.ID, Task<Product, Error>> {}
 
 struct GetProductUseCaseImpl: GetProductUseCase {
-  let productRepository: ProductRepository
+  let db: PostgrestClient
 
   func execute(input: Product.ID) -> Task<Product, Error> {
     Task {
-      try await productRepository.getProduct(id: input)
+      try await db.from("products")
+        .select()
+        .eq("id", value: input)
+        .single()
+        .execute()
+        .value
     }
   }
+}
+
+extension Dependencies {
+  static let getProductUseCase: any GetProductUseCase = GetProductUseCaseImpl(db: supabase.database)
 }
