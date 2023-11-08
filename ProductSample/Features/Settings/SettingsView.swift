@@ -12,7 +12,9 @@ import SwiftUI
 @MainActor
 final class SettingsViewModel: ObservableObject {
   private let logger = Logger.make(category: "SettingsViewModel")
-  let authenticationRepository: AuthenticationRepository
+
+  let signOutUseCase: any SignOutUseCase
+  let getProfileUseCase: any GetProfileUseCase
 
   enum NavigationDestination {
     case mfa(MFAViewModel)
@@ -21,17 +23,21 @@ final class SettingsViewModel: ObservableObject {
   @Published var destination: NavigationDestination?
   @Published var user: User?
 
-  init(authenticationRepository: AuthenticationRepository = Dependencies.authenticationRepository) {
-    self.authenticationRepository = authenticationRepository
+  init(
+    signOutUseCase: any SignOutUseCase = Dependencies.signOutUseCase,
+    getProfileUseCase: any GetProfileUseCase = Dependencies.getProfileUseCase
+  ) {
+    self.signOutUseCase = signOutUseCase
+    self.getProfileUseCase = getProfileUseCase
   }
 
   func signOutButtonTapped() async {
-    await authenticationRepository.signOut()
+    await signOutUseCase.execute().value
   }
 
   func loadProfile() async {
     do {
-      user = try await Dependencies.supabase.auth.user()
+      user = try await getProfileUseCase.execute().value
     } catch {
       logger.error("Error loading profile: \(error.localizedDescription)")
     }
@@ -52,6 +58,8 @@ struct SettingsView: View {
           LabeledContent("Email", value: user.email ?? "")
           LabeledContent("Last signed in", value: user.lastSignInAt?.formatted() ?? "")
         }
+      } else {
+        ProgressView("Loading profile...")
       }
 
       Section {

@@ -19,9 +19,6 @@ enum Dependencies {
   static let productRepository: ProductRepository = ProductRepositoryImpl(supabase: supabase)
   static let productImageStorageRepository: ProductImageStorageRepository =
     ProductImageStorageRepositoryImpl(storage: supabase.storage)
-  static let authenticationRepository: AuthenticationRepository = AuthenticationRepositoryImpl(
-    client: supabase.auth
-  )
 
   // MARK: Use Cases
 
@@ -33,7 +30,7 @@ enum Dependencies {
   static let createProductUseCase: any CreateProductUseCase = CreateProductUseCaseImpl(
     productRepository: productRepository,
     productImageStorageRepository: productImageStorageRepository,
-    authenticationRepository: authenticationRepository
+    authenticationRepository: supabase.auth
   )
 
   static let getProductUseCase: any GetProductUseCase = GetProductUseCaseImpl(
@@ -49,14 +46,10 @@ enum Dependencies {
   )
 
   static let signInUseCase: any SignInUseCase = SignInUseCaseImpl(
-    repository: authenticationRepository
+    repository: supabase.auth
   )
 
   static let signInWithAppleUseCase: any SignInWithAppleUseCase = SignInWithAppleUseCaseImpl(
-    repository: authenticationRepository
-  )
-
-  static let signUpUseCase: any SignUpUseCase = SignUpUseCaseImpl(
-    repository: authenticationRepository
+    repository: supabase.auth
   )
 }

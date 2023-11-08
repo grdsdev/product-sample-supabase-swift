@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7978343D2AF3C402001A8E2E /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 7978343C2AF3C402001A8E2E /* Functions */; };
+		7978343F2AF3C402001A8E2E /* GoTrue in Frameworks */ = {isa = PBXBuildFile; productRef = 7978343E2AF3C402001A8E2E /* GoTrue */; };
+		797834412AF3C402001A8E2E /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 797834402AF3C402001A8E2E /* PostgREST */; };
+		797834432AF3C402001A8E2E /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 797834422AF3C402001A8E2E /* Realtime */; };
+		797834452AF3C402001A8E2E /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 797834442AF3C402001A8E2E /* Storage */; };
+		799F29282AFB9E4A004F74F5 /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F29272AFB9E4A004F74F5 /* SignOutUseCase.swift */; };
+		799F292A2AFB9ED6004F74F5 /* GetProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799F29292AFB9ED6004F74F5 /* GetProfileUseCase.swift */; };
 		79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1112AF17CCB00FC331E /* AsyncButton.swift */; };
 		79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1152AF1820E00FC331E /* SettingsView.swift */; };
 		79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B1182AF1832C00FC331E /* SwiftUINavigation */; };
@@ -14,7 +21,6 @@
 		79A7B11D2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */; };
 		79A7B1202AF19B0900FC331E /* MFAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11F2AF19B0900FC331E /* MFAView.swift */; };
 		79A7B1222AF19EEE00FC331E /* MFAEnrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1212AF19EEE00FC331E /* MFAEnrollView.swift */; };
-		79D362E82AF1530300BD7BAF /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79D362E72AF1530300BD7BAF /* Supabase */; };
 		79D363152AF1535100BD7BAF /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EB2AF1535100BD7BAF /* Auth.swift */; };
 		79D363162AF1535100BD7BAF /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EC2AF1535100BD7BAF /* Product.swift */; };
 		79D363172AF1535100BD7BAF /* GetProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EE2AF1535100BD7BAF /* GetProductUseCase.swift */; };
@@ -44,9 +50,12 @@
 		79D363312AF1535100BD7BAF /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363112AF1535100BD7BAF /* ProductDetailsView.swift */; };
 		79D363322AF1535100BD7BAF /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363132AF1535100BD7BAF /* ProductListViewModel.swift */; };
 		79D363332AF1535100BD7BAF /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363142AF1535100BD7BAF /* ProductListView.swift */; };
+		79F6A1552AF2D85900D100F2 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79F6A1542AF2D85900D100F2 /* Supabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		799F29272AFB9E4A004F74F5 /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
+		799F29292AFB9ED6004F74F5 /* GetProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileUseCase.swift; sourceTree = "<group>"; };
 		79A7B1112AF17CCB00FC331E /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		79A7B1152AF1820E00FC331E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSignInWithAppleButton.swift; sourceTree = "<group>"; };
@@ -91,9 +100,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				797834432AF3C402001A8E2E /* Realtime in Frameworks */,
+				797834412AF3C402001A8E2E /* PostgREST in Frameworks */,
+				7978343F2AF3C402001A8E2E /* GoTrue in Frameworks */,
 				79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */,
+				797834452AF3C402001A8E2E /* Storage in Frameworks */,
+				79F6A1552AF2D85900D100F2 /* Supabase in Frameworks */,
+				7978343D2AF3C402001A8E2E /* Functions in Frameworks */,
 				79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */,
-				79D362E82AF1530300BD7BAF /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +200,8 @@
 				79D362F32AF1535100BD7BAF /* CreateProductUseCase.swift */,
 				79D362F42AF1535100BD7BAF /* UseCase.swift */,
 				79D362F52AF1535100BD7BAF /* GetProductsUseCase.swift */,
+				799F29272AFB9E4A004F74F5 /* SignOutUseCase.swift */,
+				799F29292AFB9ED6004F74F5 /* GetProfileUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -304,9 +320,14 @@
 			);
 			name = ProductSample;
 			packageProductDependencies = (
-				79D362E72AF1530300BD7BAF /* Supabase */,
 				79A7B1182AF1832C00FC331E /* SwiftUINavigation */,
 				79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */,
+				79F6A1542AF2D85900D100F2 /* Supabase */,
+				7978343C2AF3C402001A8E2E /* Functions */,
+				7978343E2AF3C402001A8E2E /* GoTrue */,
+				797834402AF3C402001A8E2E /* PostgREST */,
+				797834422AF3C402001A8E2E /* Realtime */,
+				797834442AF3C402001A8E2E /* Storage */,
 			);
 			productName = ProductSample;
 			productReference = 79D362D42AF152D700BD7BAF /* ProductSample.app */;
@@ -337,8 +358,8 @@
 			);
 			mainGroup = 79D362CB2AF152D700BD7BAF;
 			packageReferences = (
-				79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+				7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = 79D362D52AF152D700BD7BAF /* Products */;
 			projectDirPath = "";
@@ -368,6 +389,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				79D3632A2AF1535100BD7BAF /* ProductImageStorageRepository.swift in Sources */,
+				799F29282AFB9E4A004F74F5 /* SignOutUseCase.swift in Sources */,
+				799F292A2AFB9ED6004F74F5 /* GetProfileUseCase.swift in Sources */,
 				79D363322AF1535100BD7BAF /* ProductListViewModel.swift in Sources */,
 				79D3631F2AF1535100BD7BAF /* ProductSampleApp.swift in Sources */,
 				79D363302AF1535100BD7BAF /* ProductDetailsViewModel.swift in Sources */,
@@ -622,6 +645,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation.git";
@@ -630,17 +661,34 @@
 				minimumVersion = 1.0.2;
 			};
 		};
-		79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/supabase-community/supabase-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7978343C2AF3C402001A8E2E /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		7978343E2AF3C402001A8E2E /* GoTrue */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = GoTrue;
+		};
+		797834402AF3C402001A8E2E /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		797834422AF3C402001A8E2E /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		797834442AF3C402001A8E2E /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7978343B2AF3C402001A8E2E /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
 		79A7B1182AF1832C00FC331E /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
@@ -651,9 +699,8 @@
 			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
 			productName = SwiftUINavigationCore;
 		};
-		79D362E72AF1530300BD7BAF /* Supabase */ = {
+		79F6A1542AF2D85900D100F2 /* Supabase */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 79D362E62AF1530300BD7BAF /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
 		};
 /* End XCSwiftPackageProductDependency section */

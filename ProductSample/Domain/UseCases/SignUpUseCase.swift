@@ -23,3 +23,9 @@ struct SignUpUseCaseImpl: SignUpUseCase {
     }
   }
 }
+
+extension Dependencies {
+  static let signUpUseCase: any SignUpUseCase = SignUpUseCaseImpl(
+    repository: supabase.auth
+  )
+}
