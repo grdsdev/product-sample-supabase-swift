@@ -14,27 +14,11 @@ final class AppViewModel: ObservableObject {
   private let logger = Logger.make(category: "AppViewModel")
 
   enum AuthState {
-    case authenticated(ProductListViewModel)
-    case notAuthenticated(AuthViewModel)
+    case main(MainViewModel)
+    case auth(AuthViewModel)
   }
 
-  enum Destination {
-    case productDetail(ProductDetailsViewModel)
-    case addProduct(ProductDetailsViewModel)
-    case settings(SettingsViewModel)
-  }
-
-  @Published var destination: Destination? {
-    didSet {
-      bindDestination()
-    }
-  }
-  @Published var authState: AuthState? {
-    didSet {
-      bindAuthState()
-    }
-  }
-
+  @Published var authState: AuthState?
   private var authStateListenerTask: Task<Void, Never>?
 
   init(authenticationRepository: AuthenticationRepository = Dependencies.authenticationRepository) {
@@ -48,8 +32,8 @@ final class AppViewModel: ObservableObject {
         }
 
         switch state {
-        case .signedIn: self.authState = .authenticated(.init())
-        case .signedOut: self.authState = .notAuthenticated(.init())
+        case .signedIn: self.authState = .main(.init())
+        case .signedOut: self.authState = .auth(.init())
         }
       }
     }
@@ -57,40 +41,6 @@ final class AppViewModel: ObservableObject {
 
   deinit {
     authStateListenerTask?.cancel()
-  }
-
-  func settingsButtonTapped() {
-    destination = .settings(SettingsViewModel())
-  }
-
-  func addProductButtonTapped() {
-    destination = .addProduct(ProductDetailsViewModel(productId: nil))
-  }
-
-  private func bindDestination() {
-    switch destination {
-    case .productDetail(let productDetailsViewModel), .addProduct(let productDetailsViewModel):
-      productDetailsViewModel.onCompletion = { [weak self] _ in
-        Task {
-          if case let .authenticated(model) = self?.authState {
-            await model.loadProducts()
-          }
-        }
-      }
-
-    default: break
-    }
-  }
-
-  private func bindAuthState() {
-    switch authState {
-    case .authenticated(let productListViewModel):
-      productListViewModel.onProductTapped = { [weak self] in
-        self?.destination = .productDetail(ProductDetailsViewModel(productId: $0.id))
-      }
-
-    default: break
-    }
   }
 }
 
@@ -100,56 +50,13 @@ struct AppView: View {
   var body: some View {
     NavigationStack {
       switch model.authState {
-      case let .authenticated(model):
-        authenticatedView(model: model)
-      case let .notAuthenticated(model):
-        notAuthenticatedView(model: model)
+      case let .main(model):
+        MainView(model: model)
+      case let .auth(model):
+        AuthView(model: model)
       case .none:
         ProgressView()
       }
     }
-  }
-
-  func authenticatedView(model: ProductListViewModel) -> some View {
-    ProductListView(model: model)
-      .toolbar {
-        ToolbarItem(placement: .topBarLeading) {
-          Button {
-            self.model.settingsButtonTapped()
-          } label: {
-            Label("Settings", systemImage: "gear")
-          }
-        }
-        ToolbarItem(placement: .primaryAction) {
-          Button {
-            self.model.addProductButtonTapped()
-          } label: {
-            Label("Add", systemImage: "plus")
-          }
-        }
-      }
-      .navigationDestination(
-        unwrapping: self.$model.destination, case: /AppViewModel.Destination.productDetail
-      ) { $model in
-        ProductDetailsView(model: model)
-          .navigationTitle("Edit Product")
-      }
-      .sheet(unwrapping: self.$model.destination, case: /AppViewModel.Destination.addProduct) {
-        $model in
-        NavigationStack {
-          ProductDetailsView(model: model)
-            .navigationTitle("Add Product")
-        }
-      }
-      .sheet(unwrapping: self.$model.destination, case: /AppViewModel.Destination.settings) {
-        $model in
-        NavigationStack {
-          SettingsView(model: model)
-        }
-      }
-  }
-
-  func notAuthenticatedView(model: AuthViewModel) -> some View {
-    AuthView(model: model)
   }
 }
