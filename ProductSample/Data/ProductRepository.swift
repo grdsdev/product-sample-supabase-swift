@@ -34,7 +34,7 @@ struct ProductRepositoryImpl: ProductRepository {
   let supabase: SupabaseClient
 
   func createProduct(_ product: InsertProductDto) async throws {
-    try await supabase.database.from("products").insert(values: product).execute()
+    try await supabase.database.from("products").insert(product).execute()
   }
 
   func getProducts() async throws -> [Product] {
@@ -42,12 +42,12 @@ struct ProductRepositoryImpl: ProductRepository {
   }
 
   func getProduct(id: Product.ID) async throws -> Product {
-    try await supabase.database.from("products").select().eq(column: "id", value: id).single()
+    try await supabase.database.from("products").select().eq("id", value: id).single()
       .execute().value
   }
 
   func deleteProduct(id: Product.ID) async throws {
-    try await supabase.database.from("products").delete().eq(column: "id", value: id).execute()
+    try await supabase.database.from("products").delete().eq("id", value: id).execute()
       .value
   }
 
@@ -72,8 +72,8 @@ struct ProductRepositoryImpl: ProductRepository {
     }
 
     try await supabase.database.from("products")
-      .update(values: params)
-      .eq(column: "id", value: id)
+      .update(params)
+      .eq("id", value: id)
       .execute()
   }
 }

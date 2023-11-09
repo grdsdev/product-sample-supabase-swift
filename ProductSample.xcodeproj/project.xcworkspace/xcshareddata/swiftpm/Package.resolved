@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/supabase-community/supabase-swift",
       "state" : {
-        "branch" : "master",
-        "revision" : "a629bdea0e86a38281ab4136907eee5eafc070c3"
+        "branch" : "main",
+        "revision" : "71fd6bcea9a5f818425ef668fd37b0f40ef5fd4f"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "3efbfba0e4e56c7187cc19137ee16b7c95346b79",
-        "version" : "1.1.0"
+        "revision" : "65fc9e2b62727cacfab9fc60d580c284a4b9308c",
+        "version" : "1.1.1"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swiftui-navigation.git",
       "state" : {
-        "revision" : "6eb293c49505d86e9e24232cb6af6be7fff93bd5",
-        "version" : "1.0.2"
+        "revision" : "74adfb8e48724c50d0ac148c658ae5fa7dfd6b6d",
+        "version" : "1.0.3"
       }
     },
     {

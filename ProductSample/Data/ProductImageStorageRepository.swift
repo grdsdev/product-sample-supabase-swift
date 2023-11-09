@@ -19,7 +19,7 @@ struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
   func uploadImage(_ params: ImageUploadParams) async throws -> String {
     let fileName = "\(params.fileName).\(params.fileExtension ?? "png")"
     let contentType = params.mimeType ?? "image/png"
-    let imagePath = try await storage.from(id: "product-images")
+    let imagePath = try await storage.from("product-images")
       .upload(
         path: fileName,
         file: File(
@@ -35,6 +35,6 @@ struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
     // the path with the bucket-id already so we must provide only the file name to the download
     // call, this is what lastPathComponent is doing below.
     let fileName = (key.rawValue as NSString).lastPathComponent
-    return try await storage.from(id: "product-images").download(path: fileName)
+    return try await storage.from("product-images").download(path: fileName)
   }
 }
