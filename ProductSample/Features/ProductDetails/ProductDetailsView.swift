@@ -16,17 +16,22 @@ struct ProductDetailsView: View {
   var body: some View {
     Form {
       Section {
-        Group {
-          if let productImage = model.imageSource?.productImage {
-            productImage.image
-              .resizable()
-          } else {
-            Color.clear
+        HStack {
+          Group {
+            if let productImage = model.imageSource?.productImage {
+              productImage.image
+                .resizable()
+            } else if model.isDownloadingImage {
+              ProgressView()
+            } else {
+              Color.clear
+            }
           }
-        }
-        .scaledToFit()
-        .frame(width: 80)
-        .overlay {
+          .scaledToFit()
+          .frame(width: 80, height: 80)
+
+          Spacer()
+
           PhotosPicker(selection: $model.imageSelection, matching: .images) {
             Image(systemName: "pencil.circle.fill")
               .symbolRenderingMode(.multicolor)
@@ -37,7 +42,7 @@ struct ProductDetailsView: View {
       }
       Section {
         TextField("Product Name", text: $model.name)
-        TextField("Product Price", value: $model.price, formatter: NumberFormatter())
+        MoneyTextField("Product Price", value: $model.price)
       }
     }
     .task { await model.loadProductIfNeeded() }

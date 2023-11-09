@@ -132,11 +132,13 @@ struct AppView: View {
         unwrapping: self.$model.destination, case: /AppViewModel.Destination.productDetail
       ) { $model in
         ProductDetailsView(model: model)
+          .navigationTitle("Edit Product")
       }
       .sheet(unwrapping: self.$model.destination, case: /AppViewModel.Destination.addProduct) {
         $model in
         NavigationStack {
           ProductDetailsView(model: model)
+            .navigationTitle("Add Product")
         }
       }
       .sheet(unwrapping: self.$model.destination, case: /AppViewModel.Destination.settings) {

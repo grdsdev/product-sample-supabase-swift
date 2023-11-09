@@ -23,6 +23,11 @@ struct ProductListView: View {
           .listRowSeparator(.hidden)
       }
 
+      if model.isLoading {
+        ProgressView()
+          .frame(maxWidth: .infinity)
+      }
+
       ForEach(model.products) { product in
         Button {
           model.didTapProduct(product)
@@ -36,6 +41,9 @@ struct ProductListView: View {
         }
       }
     }
+    .animation(.easeIn, value: model.isLoading)
+    .animation(.easeIn, value: model.products.count)
+    .animation(.easeIn, value: model.error != nil)
     .listStyle(.plain)
     .overlay {
       if model.products.isEmpty {

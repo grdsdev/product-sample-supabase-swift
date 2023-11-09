@@ -47,6 +47,7 @@ final class ProductDetailsViewModel: ObservableObject {
 
   @Published var imageSource: ImageSource?
   @Published var isSavingProduct = false
+  @Published var isDownloadingImage = false
 
   var onCompletion: (Bool) -> Void = unimplemented("\(ProductDetailsViewModel.self).onCompletion")
 
@@ -73,6 +74,8 @@ final class ProductDetailsViewModel: ObservableObject {
       price = product.price
 
       if let image = product.image {
+        isDownloadingImage = true
+        defer { isDownloadingImage = false }
         let data = try await productImageStorage.downloadImage(image)
         imageSource = ProductImage(data: data).map(ImageSource.remote)
       }

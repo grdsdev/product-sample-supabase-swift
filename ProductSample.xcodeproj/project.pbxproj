@@ -42,6 +42,7 @@
 		79D363322AF1535100BD7BAF /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363132AF1535100BD7BAF /* ProductListViewModel.swift */; };
 		79D363332AF1535100BD7BAF /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363142AF1535100BD7BAF /* ProductListView.swift */; };
 		79EFDE882AFCDB80005C645E /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79EFDE872AFCDB80005C645E /* Supabase */; };
+		79EFDE8A2AFCDDE5005C645E /* MoneyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EFDE892AFCDDE5005C645E /* MoneyTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		79D363132AF1535100BD7BAF /* ProductListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		79D363142AF1535100BD7BAF /* ProductListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		79D363342AF153C200BD7BAF /* ProductSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProductSample.entitlements; sourceTree = "<group>"; };
+		79EFDE892AFCDDE5005C645E /* MoneyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				79A7B1112AF17CCB00FC331E /* AsyncButton.swift */,
 				79A7B11C2AF1882900FC331E /* SupabaseSIWA.swift */,
+				79EFDE892AFCDDE5005C645E /* MoneyTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				79D3632D2AF1535100BD7BAF /* Config.swift in Sources */,
 				79D363332AF1535100BD7BAF /* ProductListView.swift in Sources */,
 				79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */,
+				79EFDE8A2AFCDDE5005C645E /* MoneyTextField.swift in Sources */,
 				79D3631E2AF1535100BD7BAF /* GetProductsUseCase.swift in Sources */,
 				79D3632F2AF1535100BD7BAF /* AuthView.swift in Sources */,
 				79D363172AF1535100BD7BAF /* GetProductUseCase.swift in Sources */,
