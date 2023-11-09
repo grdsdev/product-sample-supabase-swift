@@ -15,6 +15,7 @@ protocol ProductImageStorageRepository: Sendable {
 
 struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
   let storage: SupabaseStorageClient
+  let localCache: any ProductImageLocalCache
 
   func uploadImage(_ params: ImageUploadParams) async throws -> String {
     let fileName = "\(params.fileName).\(params.fileExtension ?? "png")"
@@ -31,10 +32,22 @@ struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
   }
 
   func downloadImage(_ key: ImageKey) async throws -> Data {
-    // we save product images in the format "bucket-id/image.png", but SupabaseStorage prefixes
-    // the path with the bucket-id already so we must provide only the file name to the download
-    // call, this is what lastPathComponent is doing below.
-    let fileName = (key.rawValue as NSString).lastPathComponent
-    return try await storage.from("product-images").download(path: fileName)
+    if let data = try? localCache.load(at: key) {
+      return data
+    }
+
+    let fileName = key.fileName
+    let data = try await storage.from("product-images").download(path: fileName)
+    try? localCache.store(data, at: key)
+    return data
+  }
+}
+
+extension ImageKey {
+  // we save product images in the format "bucket-id/image.png", but SupabaseStorage prefixes
+  // the path with the bucket-id already so we must provide only the file name to the download
+  // call, this is what lastPathComponent is doing below.
+  var fileName: String {
+    (rawValue as NSString).lastPathComponent
   }
 }

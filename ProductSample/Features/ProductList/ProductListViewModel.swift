@@ -15,7 +15,9 @@ final class ProductListViewModel: ObservableObject {
 
   private let deleteProductUseCase: any DeleteProductUseCase
   private let getProductsUseCase: any GetProductsUseCase
+  private let productImageStorageRepository: any ProductImageStorageRepository
 
+  @Published var productImages: [Product.ID: ProductImage] = [:]
   @Published var products: [Product] = []
   @Published var isLoading = false
   @Published var error: Error?
@@ -25,10 +27,13 @@ final class ProductListViewModel: ObservableObject {
 
   init(
     deleteProductUseCase: any DeleteProductUseCase = Dependencies.deleteProductUseCase,
-    getProductsUseCase: any GetProductsUseCase = Dependencies.getProductsUseCase
+    getProductsUseCase: any GetProductsUseCase = Dependencies.getProductsUseCase,
+    productImageStorageRepository: any ProductImageStorageRepository = Dependencies
+      .productImageStorageRepository
   ) {
     self.deleteProductUseCase = deleteProductUseCase
     self.getProductsUseCase = getProductsUseCase
+    self.productImageStorageRepository = productImageStorageRepository
   }
 
   func loadProducts() async {
@@ -38,6 +43,7 @@ final class ProductListViewModel: ObservableObject {
     do {
       products = try await getProductsUseCase.execute().value
       logger.info("Products loaded.")
+      loadProductImages()
       error = nil
     } catch {
       logger.error("Error loading products: \(error)")
@@ -68,5 +74,41 @@ final class ProductListViewModel: ObservableObject {
     }
 
     await loadProducts()
+  }
+
+  private func loadProductImages() {
+    Task {
+      do {
+        let productImages = try await withThrowingTaskGroup(of: (Product.ID, ProductImage)?.self) {
+          group in
+          for product in products {
+            guard let imageKey = product.image else {
+              continue
+            }
+
+            group.addTask {
+              guard
+                let data = try? await self.productImageStorageRepository.downloadImage(imageKey),
+                let image = ProductImage(data: data)
+              else {
+                return nil
+              }
+              return (product.id, image)
+            }
+          }
+
+          return
+            try await group
+            .compactMap { $0 }
+            .reduce(into: [Product.ID: ProductImage]()) {
+              $0[$1.0] = $1.1
+            }
+        }
+
+        self.productImages = productImages
+      } catch {
+        logger.error("Error loading product images, \(error)")
+      }
+    }
   }
 }

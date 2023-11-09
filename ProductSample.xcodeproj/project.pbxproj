@@ -44,6 +44,7 @@
 		79EFDE882AFCDB80005C645E /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 79EFDE872AFCDB80005C645E /* Supabase */; };
 		79EFDE8A2AFCDDE5005C645E /* MoneyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EFDE892AFCDDE5005C645E /* MoneyTextField.swift */; };
 		79EFDE8D2AFCE233005C645E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EFDE8C2AFCE233005C645E /* MainView.swift */; };
+		79EFDE8F2AFCF172005C645E /* ProductImageLocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EFDE8E2AFCF172005C645E /* ProductImageLocalCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		79D363342AF153C200BD7BAF /* ProductSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProductSample.entitlements; sourceTree = "<group>"; };
 		79EFDE892AFCDDE5005C645E /* MoneyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTextField.swift; sourceTree = "<group>"; };
 		79EFDE8C2AFCE233005C645E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		79EFDE8E2AFCF172005C645E /* ProductImageLocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageLocalCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 				79D363042AF1535100BD7BAF /* ProductRepository.swift */,
 				79D363052AF1535100BD7BAF /* AuthenticationRepository.swift */,
 				79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */,
+				79EFDE8E2AFCF172005C645E /* ProductImageLocalCache.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				79D3632D2AF1535100BD7BAF /* Config.swift in Sources */,
 				79D363332AF1535100BD7BAF /* ProductListView.swift in Sources */,
 				79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */,
+				79EFDE8F2AFCF172005C645E /* ProductImageLocalCache.swift in Sources */,
 				79EFDE8A2AFCDDE5005C645E /* MoneyTextField.swift in Sources */,
 				79D3631E2AF1535100BD7BAF /* GetProductsUseCase.swift in Sources */,
 				79EFDE8D2AFCE233005C645E /* MainView.swift in Sources */,

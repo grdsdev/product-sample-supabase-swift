@@ -32,7 +32,20 @@ struct ProductListView: View {
         Button {
           model.didTapProduct(product)
         } label: {
-          LabeledContent(product.name, value: product.price.formatted(.currency(code: "USD")))
+          HStack {
+            if let image = model.productImages[product.id] {
+              image.image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40)
+            }
+            Text(product.name)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .foregroundStyle(.primary)
+
+            Text(product.price.formatted(.currency(code: "USD")))
+              .foregroundStyle(.secondary)
+          }
         }
       }
       .onDelete { indexSet in
@@ -42,8 +55,9 @@ struct ProductListView: View {
       }
     }
     .animation(.easeIn, value: model.isLoading)
-    .animation(.easeIn, value: model.products.count)
+    .animation(.easeIn, value: model.products)
     .animation(.easeIn, value: model.error != nil)
+    .animation(.easeIn, value: model.productImages)
     .listStyle(.plain)
     .overlay {
       if model.products.isEmpty {

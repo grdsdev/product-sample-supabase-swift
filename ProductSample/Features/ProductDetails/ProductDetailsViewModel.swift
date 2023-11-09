@@ -140,7 +140,7 @@ final class ProductDetailsViewModel: ObservableObject {
   }
 }
 
-struct ProductImage: Transferable {
+struct ProductImage: Transferable, Equatable {
   let image: Image
   let data: Data
 

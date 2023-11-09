@@ -14,11 +14,13 @@ enum Dependencies {
     supabaseKey: Config.SUPABASE_ANON_KEY
   )
 
+  static let productImageLocalCache: any ProductImageLocalCache = ProductImageLocalCacheImpl()
+
   // MARK: Repositories
 
   static let productRepository: ProductRepository = ProductRepositoryImpl(supabase: supabase)
   static let productImageStorageRepository: ProductImageStorageRepository =
-    ProductImageStorageRepositoryImpl(storage: supabase.storage)
+    ProductImageStorageRepositoryImpl(storage: supabase.storage, localCache: productImageLocalCache)
   static let authenticationRepository: AuthenticationRepository = AuthenticationRepositoryImpl(
     client: supabase.auth
   )

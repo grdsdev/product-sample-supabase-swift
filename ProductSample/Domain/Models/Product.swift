@@ -11,14 +11,14 @@ import struct GoTrue.User
 
 typealias UserID = User.ID
 
-struct Product: Identifiable, Decodable {
+struct Product: Identifiable, Decodable, Hashable {
   let id: String
   let name: String
   let price: Double
   let image: ImageKey?
 }
 
-struct ImageKey: RawRepresentable, Decodable {
+struct ImageKey: RawRepresentable, Decodable, Hashable {
   var rawValue: String
 }
 
