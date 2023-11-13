@@ -7,7 +7,6 @@
 
 import OSLog
 import SwiftUI
-import XCTestDynamicOverlay
 
 @MainActor
 final class ProductListViewModel: ObservableObject {
@@ -22,10 +21,17 @@ final class ProductListViewModel: ObservableObject {
   @Published var isLoading = false
   @Published var error: Error?
 
-  var onProductTapped: (Product) -> Void = unimplemented(
-    "\(ProductListViewModel.self).onProductTapped")
+  let onProductTapped: (Product) -> Void
+
+  init(onProductTapped: @escaping (Product) -> Void) {
+    self.onProductTapped = onProductTapped
+  }
 
   func loadProducts() async {
+    if isLoading {
+      return
+    }
+
     isLoading = true
     defer { isLoading = false }
 
@@ -68,8 +74,9 @@ final class ProductListViewModel: ObservableObject {
   private func loadProductImages() {
     Task {
       do {
-        let productImages = try await withThrowingTaskGroup(of: (Product.ID, ProductImage)?.self) {
-          group in
+        let productImages = try await withThrowingTaskGroup(
+          of: (Product.ID, ProductImage)?.self
+        ) { group in
           for product in products {
             guard let imageKey = product.image else {
               continue

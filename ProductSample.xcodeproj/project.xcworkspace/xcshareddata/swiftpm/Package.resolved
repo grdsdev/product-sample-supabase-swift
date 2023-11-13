@@ -15,7 +15,7 @@
       "location" : "https://github.com/supabase-community/supabase-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "71fd6bcea9a5f818425ef668fd37b0f40ef5fd4f"
+        "revision" : "9645768bc8799987b4dcdbec00f941dfea57b7cb"
       }
     },
     {
@@ -25,6 +25,15 @@
       "state" : {
         "revision" : "5da6989aae464f324eef5c5b52bdb7974725ab81",
         "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "swift-concurrency-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "state" : {
+        "revision" : "bb5059bde9022d69ac516803f4f227d8ac967f71",
+        "version" : "1.1.0"
       }
     },
     {

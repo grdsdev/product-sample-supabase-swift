@@ -38,6 +38,9 @@ struct InsertProduct: Encodable {
   let ownerId: User.ID
 
   enum CodingKeys: String, CodingKey {
-    case name, price, image, ownerId = "owner_id"
+    case name
+    case price
+    case image
+    case ownerId = "owner_id"
   }
 }

@@ -49,10 +49,11 @@ final class ProductDetailsViewModel: ObservableObject {
   @Published var isSavingProduct = false
   @Published var isDownloadingImage = false
 
-  var onCompletion: (Bool) -> Void = unimplemented("\(ProductDetailsViewModel.self).onCompletion")
+  let onCompletion: (Bool) -> Void
 
-  init(productId: Product.ID?) {
+  init(productId: Product.ID?, onCompletion: @escaping (Bool) -> Void) {
     self.productId = productId
+    self.onCompletion = onCompletion
   }
 
   func loadProductIfNeeded() async {

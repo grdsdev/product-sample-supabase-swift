@@ -16,18 +16,14 @@ final class MainViewModel: ObservableObject {
     case settings(SettingsViewModel)
   }
 
-  @Published var destination: Destination? {
-    didSet {
-      bindDestination()
-    }
-  }
+  @Published var destination: Destination?
 
-  let productListViewModel = ProductListViewModel()
-
-  init() {
-    productListViewModel.onProductTapped = { [weak self] in
-      self?.destination = .productDetail(ProductDetailsViewModel(productId: $0.id))
+  private(set) lazy var productListViewModel = ProductListViewModel { [weak self] in
+    let model = ProductDetailsViewModel(productId: $0.id) { [weak self] saved in
+      self?.productSaved(saved)
     }
+
+    self?.destination = .productDetail(model)
   }
 
   func settingsButtonTapped() {
@@ -35,22 +31,20 @@ final class MainViewModel: ObservableObject {
   }
 
   func addProductButtonTapped() {
-    destination = .addProduct(ProductDetailsViewModel(productId: nil))
+    destination = .addProduct(
+      ProductDetailsViewModel(productId: nil) { [weak self] in
+        self?.productSaved($0)
+      }
+    )
   }
 
-  private func bindDestination() {
-    switch destination {
-    case .productDetail(let productDetailsViewModel), .addProduct(let productDetailsViewModel):
-      productDetailsViewModel.onCompletion = { [weak self] _ in
-        Task {
-          await self?.productListViewModel.loadProducts()
-        }
-      }
+  private func productSaved(_ saved: Bool) {
+    guard saved else { return }
 
-    default: break
+    Task {
+      await productListViewModel.loadProducts()
     }
   }
-
 }
 
 struct MainView: View {
