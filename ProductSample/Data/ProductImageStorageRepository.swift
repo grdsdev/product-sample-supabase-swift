@@ -15,7 +15,10 @@ protocol ProductImageStorageRepository: Sendable {
 
 struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
   let storage: SupabaseStorageClient
-  let localCache: any ProductImageLocalCache
+
+  var localCache: any ProductImageLocalCache {
+    Dependencies.productImageLocalCache
+  }
 
   func uploadImage(_ params: ImageUploadParams) async throws -> String {
     let fileName = "\(params.fileName).\(params.fileExtension ?? "png")"

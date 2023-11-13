@@ -6,6 +6,7 @@
 //
 
 import OSLog
+import Supabase
 import SwiftUI
 import SwiftUINavigation
 
@@ -21,9 +22,9 @@ final class AppViewModel: ObservableObject {
   @Published var authState: AuthState?
   private var authStateListenerTask: Task<Void, Never>?
 
-  init(authenticationRepository: AuthenticationRepository = Dependencies.authenticationRepository) {
+  init() {
     authStateListenerTask = Task {
-      for await state in await authenticationRepository.authStateListener() {
+      for await state in await supabase.auth.onAuthStateChange() {
         logger.debug("auth state changed: \(String(describing: state))")
 
         if Task.isCancelled {
@@ -31,10 +32,11 @@ final class AppViewModel: ObservableObject {
           return
         }
 
-        switch state {
-        case .signedIn: self.authState = .main(.init())
-        case .signedOut: self.authState = .auth(.init())
+        guard Set([.initialSession, .signedIn, .signedOut]).contains(state.event) else {
+          continue
         }
+
+        self.authState = state.session == nil ? .auth(.init()) : .main(.init())
       }
     }
   }

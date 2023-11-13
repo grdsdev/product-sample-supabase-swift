@@ -13,9 +13,9 @@ import XCTestDynamicOverlay
 final class ProductListViewModel: ObservableObject {
   private let logger = Logger.make(category: "ProductListViewModel")
 
-  private let deleteProductUseCase: any DeleteProductUseCase
-  private let getProductsUseCase: any GetProductsUseCase
-  private let productImageStorageRepository: any ProductImageStorageRepository
+  private var productImageStorageRepository: any ProductImageStorageRepository {
+    Dependencies.productImageStorageRepository
+  }
 
   @Published var productImages: [Product.ID: ProductImage] = [:]
   @Published var products: [Product] = []
@@ -25,23 +25,12 @@ final class ProductListViewModel: ObservableObject {
   var onProductTapped: (Product) -> Void = unimplemented(
     "\(ProductListViewModel.self).onProductTapped")
 
-  init(
-    deleteProductUseCase: any DeleteProductUseCase = Dependencies.deleteProductUseCase,
-    getProductsUseCase: any GetProductsUseCase = Dependencies.getProductsUseCase,
-    productImageStorageRepository: any ProductImageStorageRepository = Dependencies
-      .productImageStorageRepository
-  ) {
-    self.deleteProductUseCase = deleteProductUseCase
-    self.getProductsUseCase = getProductsUseCase
-    self.productImageStorageRepository = productImageStorageRepository
-  }
-
   func loadProducts() async {
     isLoading = true
     defer { isLoading = false }
 
     do {
-      products = try await getProductsUseCase.execute().value
+      products = try await getProducts()
       logger.info("Products loaded.")
       loadProductImages()
       error = nil
@@ -66,8 +55,8 @@ final class ProductListViewModel: ObservableObject {
     products.removeAll { $0.id == product.id }
 
     do {
-      try await deleteProductUseCase.execute(input: product.id).value
       error = nil
+      try await deleteProduct(id: product.id)
     } catch {
       logger.error("Failed to remove product: \(product.id) error: \(error)")
       self.error = error
@@ -110,5 +99,21 @@ final class ProductListViewModel: ObservableObject {
         logger.error("Error loading product images, \(error)")
       }
     }
+  }
+
+  private func getProducts() async throws -> [Product] {
+    try await supabase.database
+      .from("products")
+      .select()
+      .execute()
+      .value
+  }
+
+  private func deleteProduct(id: Product.ID) async throws {
+    try await supabase.database
+      .from("products")
+      .delete()
+      .eq("id", value: id)
+      .execute()
   }
 }

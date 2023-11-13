@@ -12,21 +12,16 @@ import SwiftUI
 @MainActor
 final class SettingsViewModel: ObservableObject {
   private let logger = Logger.make(category: "SettingsViewModel")
-  let authenticationRepository: AuthenticationRepository
 
   @Published var user: User?
 
-  init(authenticationRepository: AuthenticationRepository = Dependencies.authenticationRepository) {
-    self.authenticationRepository = authenticationRepository
-  }
-
   func signOutButtonTapped() async {
-    await authenticationRepository.signOut()
+    try? await supabase.auth.signOut()
   }
 
   func loadProfile() async {
     do {
-      user = try await Dependencies.supabase.auth.user()
+      user = try await supabase.auth.user()
     } catch {
       logger.error("Error loading profile: \(error.localizedDescription)")
     }

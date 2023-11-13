@@ -13,10 +13,6 @@ import Supabase
 final class AuthViewModel: ObservableObject {
   private let logger = Logger.make(category: "AuthViewModel")
 
-  private let signInUseCase: any SignInUseCase
-  private let signInWithAppleUseCase: any SignInWithAppleUseCase
-  private let signUpUseCase: any SignUpUseCase
-
   @Published var email = ""
   @Published var password = ""
 
@@ -27,19 +23,9 @@ final class AuthViewModel: ObservableObject {
 
   @Published var status: Status?
 
-  init(
-    signInUseCase: any SignInUseCase = Dependencies.signInUseCase,
-    signInWithAppleUseCase: any SignInWithAppleUseCase = Dependencies.signInWithAppleUseCase,
-    signUpUseCase: any SignUpUseCase = Dependencies.signUpUseCase
-  ) {
-    self.signInUseCase = signInUseCase
-    self.signInWithAppleUseCase = signInWithAppleUseCase
-    self.signUpUseCase = signUpUseCase
-  }
-
   func signInButtonTapped() async {
     do {
-      try await signInUseCase.execute(input: .init(email: email, password: password)).value
+      try await supabase.auth.signIn(email: email, password: password)
       status = nil
     } catch {
       status = .error(error)
@@ -49,12 +35,19 @@ final class AuthViewModel: ObservableObject {
 
   func signUpButtonTapped() async {
     do {
-      let result = try await signUpUseCase.execute(input: .init(email: email, password: password))
-        .value
-      if result == .requiresConfirmation {
-        status = .requiresConfirmation
-      } else {
+      // This redirect to URL should match the one configured in Supabase's Dashboard.
+      let redirectToURL = URL(string: "dev.grds.supabase.product-sample://")
+
+      let response = try await supabase.auth.signUp(
+        email: email,
+        password: password,
+        redirectTo: redirectToURL
+      )
+
+      if case .session = response {
         status = nil
+      } else {
+        status = .requiresConfirmation
       }
     } catch {
       status = .error(error)
@@ -65,7 +58,13 @@ final class AuthViewModel: ObservableObject {
   func signInWithApple(_ result: Result<SIWACredentials, Error>) async {
     do {
       let credentials = try result.get()
-      try await signInWithAppleUseCase.execute(input: credentials).value
+      try await supabase.auth.signInWithIdToken(
+        credentials: OpenIDConnectCredentials(
+          provider: .apple,
+          idToken: credentials.identityToken,
+          nonce: credentials.nonce
+        )
+      )
     } catch {
       logger.error("Error signing in with apple: \(error)")
     }
@@ -74,7 +73,7 @@ final class AuthViewModel: ObservableObject {
   func onOpenURL(_ url: URL) async {
     do {
       logger.debug("Retrieve session from url: \(url)")
-      try await Dependencies.supabase.auth.session(from: url)
+      try await supabase.auth.session(from: url)
       await signInButtonTapped()
       status = nil
     } catch {

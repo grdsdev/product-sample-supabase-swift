@@ -7,6 +7,7 @@
 
 import OSLog
 import PhotosUI
+import Supabase
 import SwiftUI
 import XCTestDynamicOverlay
 
@@ -16,10 +17,9 @@ final class ProductDetailsViewModel: ObservableObject {
 
   private let productId: Product.ID?
 
-  private let updateProductUseCase: any UpdateProductUseCase
-  private let createProductUseCase: any CreateProductUseCase
-  private let getProductUseCase: any GetProductUseCase
-  private let productImageStorage: ProductImageStorageRepository
+  private var productImageStorage: any ProductImageStorageRepository {
+    Dependencies.productImageStorageRepository
+  }
 
   @Published var name: String = ""
   @Published var price: Double = 0
@@ -51,17 +51,7 @@ final class ProductDetailsViewModel: ObservableObject {
 
   var onCompletion: (Bool) -> Void = unimplemented("\(ProductDetailsViewModel.self).onCompletion")
 
-  init(
-    updateProductUseCase: any UpdateProductUseCase = Dependencies.updateProductUseCase,
-    createProductUseCase: any CreateProductUseCase = Dependencies.createProductUseCase,
-    getProductUseCase: any GetProductUseCase = Dependencies.getProductUseCase,
-    productImageStorage: ProductImageStorageRepository = Dependencies.productImageStorageRepository,
-    productId: Product.ID?
-  ) {
-    self.updateProductUseCase = updateProductUseCase
-    self.createProductUseCase = createProductUseCase
-    self.getProductUseCase = getProductUseCase
-    self.productImageStorage = productImageStorage
+  init(productId: Product.ID?) {
     self.productId = productId
   }
 
@@ -69,7 +59,14 @@ final class ProductDetailsViewModel: ObservableObject {
     guard let productId else { return }
 
     do {
-      let product = try await getProductUseCase.execute(input: productId).value
+      let product: Product = try await supabase.database
+        .from("products")
+        .select()
+        .eq("id", value: productId)
+        .single()
+        .execute()
+        .value
+
       name = product.name
       price = product.price
 
@@ -88,39 +85,46 @@ final class ProductDetailsViewModel: ObservableObject {
     isSavingProduct = true
     defer { isSavingProduct = false }
 
-    let imageUploadParams =
+    do {
+      var imageFilePath: String?
+
       if case let .local(image) = imageSource {
-        ImageUploadParams(
+        let image = ImageUploadParams(
           fileName: UUID().uuidString,
           fileExtension: imageSelection?.supportedContentTypes.first?.preferredFilenameExtension,
           mimeType: imageSelection?.supportedContentTypes.first?.preferredMIMEType,
           data: image.data
         )
-      } else {
-        ImageUploadParams?.none
+
+        imageFilePath = try await productImageStorage.uploadImage(image)
       }
 
-    do {
       if let productId {
         logger.info("Will update product: \(productId)")
 
-        try await updateProductUseCase.execute(
-          input: UpdateProductParams(
-            id: productId,
-            name: name,
-            price: price,
-            image: imageUploadParams
-          )
-        ).value
+        var params: [String: AnyJSON] = [
+          "name": .string(name),
+          "price": .number(price),
+        ]
+
+        if let imageFilePath {
+          params["image"] = .string(imageFilePath)
+        }
+
+        try await supabase.database.from("products")
+          .update(params)
+          .eq("id", value: productId)
+          .execute()
       } else {
         logger.info("Will add product")
-        try await createProductUseCase.execute(
-          input: CreateProductParams(
-            name: name,
-            price: price,
-            image: imageUploadParams
-          )
-        ).value
+
+        let currentUserId = try await supabase.auth.session.user.id
+
+        let product = InsertProduct(
+          name: name, price: price, image: imageFilePath, ownerId: currentUserId
+        )
+
+        try await supabase.database.from("products").insert(product).execute()
       }
 
       logger.error("Save succeeded")

@@ -58,6 +58,7 @@ struct MainView: View {
 
   var body: some View {
     ProductListView(model: model.productListViewModel)
+      .navigationTitle("Products")
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
           Button {
