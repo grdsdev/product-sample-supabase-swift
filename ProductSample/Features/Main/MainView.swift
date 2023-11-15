@@ -56,33 +56,35 @@ struct MainView: View {
       .toolbar {
         ToolbarItem(placement: .topBarLeading) {
           Button {
-            self.model.settingsButtonTapped()
+            model.settingsButtonTapped()
           } label: {
             Label("Settings", systemImage: "gear")
           }
         }
         ToolbarItem(placement: .primaryAction) {
           Button {
-            self.model.addProductButtonTapped()
+            model.addProductButtonTapped()
           } label: {
             Label("Add", systemImage: "plus")
           }
         }
       }
       .navigationDestination(
-        unwrapping: self.$model.destination, case: /MainViewModel.Destination.productDetail
+        unwrapping: $model.destination, case: /MainViewModel.Destination.productDetail
       ) { $model in
         ProductDetailsView(model: model)
           .navigationTitle("Edit Product")
       }
-      .sheet(unwrapping: self.$model.destination, case: /MainViewModel.Destination.addProduct) {
-        $model in
+      .sheet(
+        unwrapping: $model.destination,
+        case: /MainViewModel.Destination.addProduct
+      ) { $model in
         NavigationStack {
           ProductDetailsView(model: model)
             .navigationTitle("Add Product")
         }
       }
-      .sheet(unwrapping: self.$model.destination, case: /MainViewModel.Destination.settings) {
+      .sheet(unwrapping: $model.destination, case: /MainViewModel.Destination.settings) {
         $model in
         NavigationStack {
           SettingsView(model: model)

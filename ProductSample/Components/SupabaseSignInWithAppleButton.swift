@@ -1,5 +1,5 @@
 //
-//  SupabaseSIWA.swift
+//  SupabaseSignInWithAppleButton.swift
 //  ProductSample
 //
 //  Created by Guilherme Souza on 31/10/23.
