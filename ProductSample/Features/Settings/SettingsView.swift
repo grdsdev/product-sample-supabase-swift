@@ -5,26 +5,19 @@
 //  Created by Guilherme Souza on 31/10/23.
 //
 
-import OSLog
 import Supabase
 import SwiftUI
 
 @MainActor
 final class SettingsViewModel: ObservableObject {
-  private let logger = Logger.make(category: "SettingsViewModel")
-
   @Published var user: User?
 
   func signOutButtonTapped() async {
-    try? await supabase.auth.signOut()
+    // TODO: Implement sign out.
   }
 
   func loadProfile() async {
-    do {
-      user = try await supabase.auth.user()
-    } catch {
-      logger.error("Error loading profile: \(error.localizedDescription)")
-    }
+    // TODO: Fetch user from Supabase.
   }
 }
 

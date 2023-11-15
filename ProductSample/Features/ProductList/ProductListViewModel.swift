@@ -5,16 +5,11 @@
 //  Created by Guilherme Souza on 19/10/23.
 //
 
-import OSLog
 import SwiftUI
 
 @MainActor
 final class ProductListViewModel: ObservableObject {
-  private let logger = Logger.make(category: "ProductListViewModel")
-
-  private var productImageStorageRepository: any ProductImageStorageRepository {
-    Dependencies.productImageStorageRepository
-  }
+  private let productImageStorageRepository: any ProductImageStorageRepository
 
   @Published var productImages: [Product.ID: ProductImage] = [:]
   @Published var products: [Product] = []
@@ -23,7 +18,12 @@ final class ProductListViewModel: ObservableObject {
 
   let onProductTapped: (Product) -> Void
 
-  init(onProductTapped: @escaping (Product) -> Void) {
+  init(
+    productImageStorageRepository: any ProductImageStorageRepository =
+      ProductImageStorageRepositoryImpl(storage: supabase.storage),
+    onProductTapped: @escaping (Product) -> Void
+  ) {
+    self.productImageStorageRepository = productImageStorageRepository
     self.onProductTapped = onProductTapped
   }
 
@@ -37,11 +37,9 @@ final class ProductListViewModel: ObservableObject {
 
     do {
       products = try await getProducts()
-      logger.info("Products loaded.")
       loadProductImages()
       error = nil
     } catch {
-      logger.error("Error loading products: \(error)")
       self.error = error
     }
   }
@@ -64,7 +62,6 @@ final class ProductListViewModel: ObservableObject {
       error = nil
       try await deleteProduct(id: product.id)
     } catch {
-      logger.error("Failed to remove product: \(product.id) error: \(error)")
       self.error = error
     }
 
@@ -103,24 +100,17 @@ final class ProductListViewModel: ObservableObject {
 
         self.productImages = productImages
       } catch {
-        logger.error("Error loading product images, \(error)")
+        debugPrint("Error loading product images, \(error)")
       }
     }
   }
 
   private func getProducts() async throws -> [Product] {
-    try await supabase.database
-      .from("products")
-      .select()
-      .execute()
-      .value
+    // TODO: Fetch all products from Supabase.
+    return []
   }
 
   private func deleteProduct(id: Product.ID) async throws {
-    try await supabase.database
-      .from("products")
-      .delete()
-      .eq("id", value: id)
-      .execute()
+    // TODO: Delete product with `id`.
   }
 }

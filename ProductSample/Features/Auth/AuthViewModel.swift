@@ -6,13 +6,10 @@
 //
 
 import Foundation
-import OSLog
 import Supabase
 
 @MainActor
 final class AuthViewModel: ObservableObject {
-  private let logger = Logger.make(category: "AuthViewModel")
-
   @Published var email = ""
   @Published var password = ""
 
@@ -24,61 +21,18 @@ final class AuthViewModel: ObservableObject {
   @Published var status: Status?
 
   func signInButtonTapped() async {
-    do {
-      try await supabase.auth.signIn(email: email, password: password)
-      status = nil
-    } catch {
-      status = .error(error)
-      logger.error("Error signing in: \(error)")
-    }
+    // TODO: Implement sign in using email and password.
   }
 
   func signUpButtonTapped() async {
-    do {
-      // This redirect to URL should match the one configured in Supabase's Dashboard.
-      let redirectToURL = URL(string: "dev.grds.supabase.product-sample://")
-
-      let response = try await supabase.auth.signUp(
-        email: email,
-        password: password,
-        redirectTo: redirectToURL
-      )
-
-      if case .session = response {
-        status = nil
-      } else {
-        status = .requiresConfirmation
-      }
-    } catch {
-      status = .error(error)
-      logger.error("Error signing up: \(error)")
-    }
+    // TODO: Implement sign up using email and password.
   }
 
   func signInWithApple(_ result: Result<SIWACredentials, Error>) async {
-    do {
-      let credentials = try result.get()
-      try await supabase.auth.signInWithIdToken(
-        credentials: OpenIDConnectCredentials(
-          provider: .apple,
-          idToken: credentials.identityToken,
-          nonce: credentials.nonce
-        )
-      )
-    } catch {
-      logger.error("Error signing in with apple: \(error)")
-    }
+    // TODO: Implement Sign in with Apple using signInWithIdToken method.
   }
 
   func onOpenURL(_ url: URL) async {
-    do {
-      logger.debug("Retrieve session from url: \(url)")
-      try await supabase.auth.session(from: url)
-      await signInButtonTapped()
-      status = nil
-    } catch {
-      status = .error(error)
-      logger.error("Error creating session from url: \(error)")
-    }
+    // TODO: Try to initialize a session from the URL.
   }
 }

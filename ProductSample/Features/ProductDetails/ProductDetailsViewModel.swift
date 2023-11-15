@@ -5,7 +5,6 @@
 //  Created by Guilherme Souza on 19/10/23.
 //
 
-import OSLog
 import PhotosUI
 import Supabase
 import SwiftUI
@@ -13,13 +12,7 @@ import XCTestDynamicOverlay
 
 @MainActor
 final class ProductDetailsViewModel: ObservableObject {
-  private let logger = Logger.make(category: "ProductDetailsViewModel")
-
   private let productId: Product.ID?
-
-  private var productImageStorage: any ProductImageStorageRepository {
-    Dependencies.productImageStorageRepository
-  }
 
   @Published var name: String = ""
   @Published var price: Double = 0
@@ -57,85 +50,12 @@ final class ProductDetailsViewModel: ObservableObject {
   }
 
   func loadProductIfNeeded() async {
-    guard let productId else { return }
-
-    do {
-      let product: Product = try await supabase.database
-        .from("products")
-        .select()
-        .eq("id", value: productId)
-        .single()
-        .execute()
-        .value
-
-      name = product.name
-      price = product.price
-
-      if let image = product.image {
-        isDownloadingImage = true
-        defer { isDownloadingImage = false }
-        let data = try await productImageStorage.downloadImage(image)
-        imageSource = ProductImage(data: data).map(ImageSource.remote)
-      }
-    } catch {
-      logger.error("Error loading product: \(error)")
-    }
+    // TODO: Load the product from Supabase using provided productId.
   }
 
   func saveButtonTapped() async -> Bool {
-    isSavingProduct = true
-    defer { isSavingProduct = false }
-
-    do {
-      var imageFilePath: String?
-
-      if case let .local(image) = imageSource {
-        let image = ImageUploadParams(
-          fileName: UUID().uuidString,
-          fileExtension: imageSelection?.supportedContentTypes.first?.preferredFilenameExtension,
-          mimeType: imageSelection?.supportedContentTypes.first?.preferredMIMEType,
-          data: image.data
-        )
-
-        imageFilePath = try await productImageStorage.uploadImage(image)
-      }
-
-      if let productId {
-        logger.info("Will update product: \(productId)")
-
-        var params: [String: AnyJSON] = [
-          "name": .string(name),
-          "price": .number(price),
-        ]
-
-        if let imageFilePath {
-          params["image"] = .string(imageFilePath)
-        }
-
-        try await supabase.database.from("products")
-          .update(params)
-          .eq("id", value: productId)
-          .execute()
-      } else {
-        logger.info("Will add product")
-
-        let currentUserId = try await supabase.auth.session.user.id
-
-        let product = InsertProduct(
-          name: name, price: price, image: imageFilePath, ownerId: currentUserId
-        )
-
-        try await supabase.database.from("products").insert(product).execute()
-      }
-
-      logger.error("Save succeeded")
-      onCompletion(true)
-      return true
-    } catch {
-      logger.error("Save failed: \(error)")
-      onCompletion(false)
-      return false
-    }
+    // TODO: Implement adding/updating the product in Supabase.
+    return true
   }
 
   private func loadTransferable(from imageSelection: PhotosPickerItem) async {

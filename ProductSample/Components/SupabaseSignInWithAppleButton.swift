@@ -16,31 +16,9 @@ struct SupabaseSignInWithAppleButton: View {
 
   var body: some View {
     SignInWithAppleButton { request in
-      let nonce = randomString()
-      self.nonce = nonce
-      request.nonce = sha256(nonce)
-      request.requestedScopes = [.email, .fullName]
+      // TODO: Set request nonce and define requested scopes
     } onCompletion: { result in
-      switch result {
-      case .success(let authorization):
-        guard
-          let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
-          let idToken = credential.identityToken.flatMap({ String(data: $0, encoding: .utf8) })
-        else {
-          return
-        }
-
-        let credentials = SIWACredentials(
-          identityToken: idToken,
-          nonce: nonce!
-        )
-
-        onCompletion(.success(credentials))
-
-      case .failure(let error):
-        onCompletion(.failure(error))
-
-      }
+      // TODO: Parse ASAuthorizationAppleIDCredential from result
     }
     .fixedSize()
   }

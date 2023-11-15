@@ -15,23 +15,19 @@ protocol ProductImageStorageRepository: Sendable {
 
 struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
   let storage: SupabaseStorageClient
+  let localCache: any ProductImageLocalCache
 
-  var localCache: any ProductImageLocalCache {
-    Dependencies.productImageLocalCache
+  init(
+    storage: SupabaseStorageClient,
+    localCache: any ProductImageLocalCache = ProductImageLocalCacheImpl()
+  ) {
+    self.storage = storage
+    self.localCache = localCache
   }
 
   func uploadImage(_ params: ImageUploadParams) async throws -> String {
-    let fileName = "\(params.fileName).\(params.fileExtension ?? "png")"
-    let contentType = params.mimeType ?? "image/png"
-    let imagePath = try await storage.from("product-images")
-      .upload(
-        path: fileName,
-        file: File(
-          name: fileName, data: params.data, fileName: fileName, contentType: contentType
-        ),
-        fileOptions: FileOptions(contentType: contentType, upsert: true)
-      )
-    return imagePath
+    // TODO: Upload image to Supabase using params.
+    return ""
   }
 
   func downloadImage(_ key: ImageKey) async throws -> Data {
@@ -39,10 +35,8 @@ struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
       return data
     }
 
-    let fileName = key.fileName
-    let data = try await storage.from("product-images").download(path: fileName)
-    try? localCache.store(data, at: key)
-    return data
+    // TODO: Download image from Supabase and cache it locally.
+    return Data()
   }
 }
 

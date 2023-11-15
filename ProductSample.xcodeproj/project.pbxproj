@@ -15,13 +15,12 @@
 		79D363152AF1535100BD7BAF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EB2AF1535100BD7BAF /* Models.swift */; };
 		79D3631F2AF1535100BD7BAF /* ProductSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362F72AF1535100BD7BAF /* ProductSampleApp.swift */; };
 		79D363202AF1535100BD7BAF /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362F82AF1535100BD7BAF /* AppView.swift */; };
-		79D363212AF1535100BD7BAF /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362F92AF1535100BD7BAF /* Dependencies.swift */; };
+		79D363212AF1535100BD7BAF /* Supabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362F92AF1535100BD7BAF /* Supabase.swift */; };
 		79D363222AF1535100BD7BAF /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362FB2AF1535100BD7BAF /* Routes.swift */; };
 		79D363232AF1535100BD7BAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D362FD2AF1535100BD7BAF /* Assets.xcassets */; };
 		79D363242AF1535100BD7BAF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79D362FF2AF1535100BD7BAF /* Preview Assets.xcassets */; };
 		79D363262AF1535100BD7BAF /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79D363012AF1535100BD7BAF /* Config.plist */; };
 		79D3632A2AF1535100BD7BAF /* ProductImageStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */; };
-		79D3632B2AF1535100BD7BAF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363082AF1535100BD7BAF /* Logger.swift */; };
 		79D3632C2AF1535100BD7BAF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D363092AF1535100BD7BAF /* Result.swift */; };
 		79D3632D2AF1535100BD7BAF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D3630A2AF1535100BD7BAF /* Config.swift */; };
 		79D3632E2AF1535100BD7BAF /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D3630D2AF1535100BD7BAF /* AuthViewModel.swift */; };
@@ -44,14 +43,13 @@
 		79D362EB2AF1535100BD7BAF /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		79D362F72AF1535100BD7BAF /* ProductSampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSampleApp.swift; sourceTree = "<group>"; };
 		79D362F82AF1535100BD7BAF /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		79D362F92AF1535100BD7BAF /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		79D362F92AF1535100BD7BAF /* Supabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Supabase.swift; sourceTree = "<group>"; };
 		79D362FB2AF1535100BD7BAF /* Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		79D362FD2AF1535100BD7BAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79D362FF2AF1535100BD7BAF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		79D363012AF1535100BD7BAF /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		79D363022AF1535100BD7BAF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79D363062AF1535100BD7BAF /* ProductImageStorageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductImageStorageRepository.swift; sourceTree = "<group>"; };
-		79D363082AF1535100BD7BAF /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		79D363092AF1535100BD7BAF /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		79D3630A2AF1535100BD7BAF /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		79D3630D2AF1535100BD7BAF /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -151,7 +149,7 @@
 			children = (
 				79D362F72AF1535100BD7BAF /* ProductSampleApp.swift */,
 				79D362F82AF1535100BD7BAF /* AppView.swift */,
-				79D362F92AF1535100BD7BAF /* Dependencies.swift */,
+				79D362F92AF1535100BD7BAF /* Supabase.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -196,7 +194,6 @@
 		79D363072AF1535100BD7BAF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				79D363082AF1535100BD7BAF /* Logger.swift */,
 				79D363092AF1535100BD7BAF /* Result.swift */,
 				79D3630A2AF1535100BD7BAF /* Config.swift */,
 			);
@@ -345,10 +342,9 @@
 				79D363222AF1535100BD7BAF /* Routes.swift in Sources */,
 				79D363312AF1535100BD7BAF /* ProductDetailsView.swift in Sources */,
 				79D363152AF1535100BD7BAF /* Models.swift in Sources */,
-				79D363212AF1535100BD7BAF /* Dependencies.swift in Sources */,
+				79D363212AF1535100BD7BAF /* Supabase.swift in Sources */,
 				79A7B11D2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift in Sources */,
 				79D363202AF1535100BD7BAF /* AppView.swift in Sources */,
-				79D3632B2AF1535100BD7BAF /* Logger.swift in Sources */,
 				79D3632E2AF1535100BD7BAF /* AuthViewModel.swift in Sources */,
 				79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */,
 				79D3632D2AF1535100BD7BAF /* Config.swift in Sources */,

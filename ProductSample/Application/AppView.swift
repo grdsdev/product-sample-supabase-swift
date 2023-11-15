@@ -5,15 +5,12 @@
 //  Created by Guilherme Souza on 18/10/23.
 //
 
-import OSLog
 import Supabase
 import SwiftUI
 import SwiftUINavigation
 
 @MainActor
 final class AppViewModel: ObservableObject {
-  private let logger = Logger.make(category: "AppViewModel")
-
   enum AuthState {
     case main(MainViewModel)
     case auth(AuthViewModel)
@@ -24,20 +21,7 @@ final class AppViewModel: ObservableObject {
 
   init() {
     authStateListenerTask = Task {
-      for await state in await supabase.auth.onAuthStateChange() {
-        logger.debug("auth state changed: \(String(describing: state))")
-
-        if Task.isCancelled {
-          logger.debug("auth state task cancelled, returning.")
-          return
-        }
-
-        guard Set([.initialSession, .signedIn, .signedOut]).contains(state.event) else {
-          continue
-        }
-
-        self.authState = state.session == nil ? .auth(.init()) : .main(.init())
-      }
+      // TODO: Listen for auth state changes, and set authState property accordingly.
     }
   }
 
