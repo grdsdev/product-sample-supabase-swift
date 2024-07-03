@@ -105,7 +105,7 @@ final class ProductDetailsViewModel: ObservableObject {
 
         var params: [String: AnyJSON] = [
           "name": .string(name),
-          "price": .number(price),
+          "price": .double(price),
         ]
 
         if let imageFilePath {

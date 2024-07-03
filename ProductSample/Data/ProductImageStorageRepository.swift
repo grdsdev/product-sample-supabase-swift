@@ -22,16 +22,13 @@ struct ProductImageStorageRepositoryImpl: ProductImageStorageRepository {
 
   func uploadImage(_ params: ImageUploadParams) async throws -> String {
     let fileName = "\(params.fileName).\(params.fileExtension ?? "png")"
-    let contentType = params.mimeType ?? "image/png"
     let imagePath = try await storage.from("product-images")
       .upload(
         path: fileName,
-        file: File(
-          name: fileName, data: params.data, fileName: fileName, contentType: contentType
-        ),
-        fileOptions: FileOptions(contentType: contentType, upsert: true)
+        file: params.data,
+        options: FileOptions(upsert: true)
       )
-    return imagePath
+    return imagePath.fullPath
   }
 
   func downloadImage(_ key: ImageKey) async throws -> Data {

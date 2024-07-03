@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7912A0F42C35429700EFF6A5 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 7912A0F32C35429700EFF6A5 /* SwiftUINavigation */; };
 		79A7B1122AF17CCB00FC331E /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1112AF17CCB00FC331E /* AsyncButton.swift */; };
 		79A7B1162AF1820E00FC331E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B1152AF1820E00FC331E /* SettingsView.swift */; };
-		79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B1182AF1832C00FC331E /* SwiftUINavigation */; };
-		79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */ = {isa = PBXBuildFile; productRef = 79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */; };
 		79A7B11D2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7B11C2AF1882900FC331E /* SupabaseSignInWithAppleButton.swift */; };
 		79D363152AF1535100BD7BAF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362EB2AF1535100BD7BAF /* Models.swift */; };
 		79D3631F2AF1535100BD7BAF /* ProductSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D362F72AF1535100BD7BAF /* ProductSampleApp.swift */; };
@@ -71,9 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79A7B1192AF1832C00FC331E /* SwiftUINavigation in Frameworks */,
+				7912A0F42C35429700EFF6A5 /* SwiftUINavigation in Frameworks */,
 				79EFDE882AFCDB80005C645E /* Supabase in Frameworks */,
-				79A7B11B2AF1832C00FC331E /* SwiftUINavigationCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,9 +272,8 @@
 			);
 			name = ProductSample;
 			packageProductDependencies = (
-				79A7B1182AF1832C00FC331E /* SwiftUINavigation */,
-				79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */,
 				79EFDE872AFCDB80005C645E /* Supabase */,
+				7912A0F32C35429700EFF6A5 /* SwiftUINavigation */,
 			);
 			productName = ProductSample;
 			productReference = 79D362D42AF152D700BD7BAF /* ProductSample.app */;
@@ -594,22 +591,17 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase-community/supabase-swift";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		79A7B1182AF1832C00FC331E /* SwiftUINavigation */ = {
+		7912A0F32C35429700EFF6A5 /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
 			productName = SwiftUINavigation;
-		};
-		79A7B11A2AF1832C00FC331E /* SwiftUINavigationCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 79A7B1172AF1832C00FC331E /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
-			productName = SwiftUINavigationCore;
 		};
 		79EFDE872AFCDB80005C645E /* Supabase */ = {
 			isa = XCSwiftPackageProductDependency;
